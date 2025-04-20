@@ -28,16 +28,27 @@ export const fetchMovies=async({ query}:{query:string})=>{
 
     return data.results;
 }
-// const url = 'https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc';
-// const options = {
-//   method: 'GET',
-//   headers: {
-//     accept: 'application/json',
-//     Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiNzQzZDcxNGI1OTBhZTM1OGIzY2MyZjc1Njk3ZDU0YSIsIm5iZiI6MTc0NTA3MzMxNC42ODMsInN1YiI6IjY4MDNiNGEyZTNmYWMyZjkwMjg5OWY5NSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.mAJ6D4v4NK-dMrsUeSbhYbfIjaIg3hRLY6ch9oyFIcg'
-//   }
-// };
 
-// fetch(url, options)
-//   .then(res => res.json())
-//   .then(json => console.log(json))
-//   .catch(err => console.error(err));
+
+export const fetchMovieDetails=async(movieId:string):Promise<MovieDetails>=>{
+    try {
+        const response = await fetch(
+            `${TMDB_CONFIG.BASE_URL}/movie/${movieId}?api_key=${TMDB_CONFIG.API_KEY}`,
+            {
+              method: "GET",
+              headers: TMDB_CONFIG.headers,
+            }
+          );
+      
+          if (!response.ok) {
+            throw new Error(`Failed to fetch movie details: ${response.statusText}`);
+          }
+      
+          const data = await response.json();
+          return data;
+          
+    } catch (error) {
+        console.log(error);
+        throw error;
+    }
+}

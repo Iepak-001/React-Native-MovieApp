@@ -15,7 +15,7 @@ const TrendingCard=( {movie:{movie_id, title, poster_url},  index}:TrendingCardP
                 
                 />
 
-                <View className="absolute bottom-9 -left-3.5 px-1 py-1 rounded-full">
+                <View className="absolute bottom-9 -left-1.5 px-1 py-1 rounded-full">
                     <MaskedView 
                          maskElement={
                         <Text className="font-bold text-white text-6xl">
@@ -28,6 +28,13 @@ const TrendingCard=( {movie:{movie_id, title, poster_url},  index}:TrendingCardP
                     </MaskedView>
 
                 </View>
+
+                <Text
+                    className="text-sm font-bold mt-2 text-light-200"
+                    numberOfLines={2}
+                >
+                    {title}
+                </Text>
 
 
             </TouchableOpacity>
